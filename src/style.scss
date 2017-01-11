@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:400,600,700|Open+Sans');
+$purple: #353960;
+$red: #ff5353;
+$white: #ffffff;
+$grey: #efefef;
+@mixin center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@mixin shadow {
+	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+a {
+	text-decoration: none;
+}
+body {
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	background: url(bg.jpeg);
+	background-size: cover;
+	background-position: bottom center;
+	@include center;
+	font-family: 'Dosis', sans-serif;
+}
+.main-container {
+	width: 500px;
+	height: 700px;
+	background: $grey;
+	box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.4);
+	position: relative;
+	z-index: 1;
+	overflow-y: auto;
+}
+.header {
+	background: $purple;
+	width: 100%;
+	height: 70px;
+	padding: 20px;
+	margin-bottom: 20px;
+	.logo {
+		color: $white;
+		float: left;
+		.light {
+			font-weight: lighter;
+		}
+	}
+	.delete-btn {
+		color: $white;
+		padding-top: 10px;
+		padding-top: 10px;
+		align-items: flex-end;
+		float: right;
+		cursor: pointer;
+	}
+}
+.add-new {
+	float: right;
+	color: white;
+	cursor: pointer;
+	padding-top: 10px;
+}
+.add-new:hover {
+	color: $red;
+}
+.r-container {
+	animation: animatetop .3s cubic-bezier(0, 1.24, 0.12, 1.01);
+	-webkit-animation: animatetop .3s cubic-bezier(0, 1.24, 0.12, 1.01);
+	-moz-animation: animatetop .3s cubic-bezier(0, 1.24, 0.12, 1.01);
+}
+.recipe-box {
+	margin: 0 auto;
+	width: 90%;
+	min-height: 80px;
+	background: $white;
+	@include shadow;
+	position: relative;
+	padding-top: 27px;
+	margin-bottom: 20px;
+	&:before {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		top: 3px;
+		right: 2px;
+		width: 99%;
+		height: 100%;
+		background: $white;
+		@include shadow;
+	}
+	.edit {
+		display: block;
+		cursor: pointer;
+		color: $red;
+	}
+	.info {
+		padding-left: 20px;
+		padding-right: 20px;
+		width: 100%;
+		color: $purple;
+		cursor: pointer;
+		.title {
+			font-weight: 600;
+			font-size: 16px;
+			float: left;
+		}
+		.expand {
+			font-size: 22px;
+			cursor: pointer;
+			float: right;
+		}
+		.ex-rotate {
+			-ms-transform: rotate(90deg);
+			-webkit-transform: rotate(90deg);
+			transform: rotate(90deg);
+		}
+		.delete {
+			@extend .expand;
+			display: none;
+		}
+	}
+	.info:hover {
+		color: $red;
+	}
+}
+.instructions {
+	display: none;
+	background: $white;
+	margin-top: 40px;
+	z-index: 1;
+	padding: 20px;
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+	line-height: 20px;
+	animation: animatetop .3s cubic-bezier(0, 1.24, 0.12, 1.01);
+	-webkit-animation: animatetop .3s cubic-bezier(0, 1.24, 0.12, 1.01);
+	-moz-animation: animatetop .3s cubic-bezier(0, 1.24, 0.12, 1.01);
+}
+@keyframes animatetop {
+	from {
+		opacity: 0;
+		transform: translateY(-40px);
+	}
+	to {
+		top: 80px;
+		opacity: 1;
+	}
+}
+.add-btn {
+	color: $red;
+	font-size: 54px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding-bottom: 20px;
+	padding-right: 20px;
+	animation: rotateOut .2s ease;
+	-webkit-animation: rotateOut .2s ease;
+	-moz-animation: rotateOut .2s ease;
+}
+.cancel-btn {
+	@extend .add-btn;
+	display: none;
+}
+
+@keyframes rotateOut {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(.5);
+	}
+}
+
+.form-container {
+	font-family: 'Open Sans', sans-serif;
+	display: none;
+	width: 90%;
+	margin: 0 auto;
+	animation: animatetop .3s cubic-bezier(0, 1.24, 0.12, 1.01);
+	-webkit-animation: animatetop .3s cubic-bezier(0, 1.24, 0.12, 1.01);
+	-moz-animation: animatetop .3s cubic-bezier(0, 1.24, 0.12, 1.01);
+	input:focus,
+	textarea:focus {
+		border: 1px solid $purple;
+	}
+	input {
+		width: 100%;
+		padding: 5px;
+		padding-bottom: 10px;
+		padding-top: 10px;
+		margin-bottom: 10px;
+		border: 1px solid transparent;
+	}
+	textarea {
+		padding: 5px;
+		width: 100%;
+		height: 30vh;
+		resize: none;
+		margin-bottom: 10px;
+		border: none;
+	}
+	button.save {
+		width: 100%;
+		border: none;
+		background: $red;
+		padding-top: 20px;
+		padding-bottom: 20px;
+  	font-size: 13px;
+		text-transform: uppercase;
+		font-weight: bolder;
+		letter-spacing: 1px;
+  	color: $white;
+	}
+}
